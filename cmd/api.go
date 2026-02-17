@@ -3,6 +3,7 @@ package main
 import (
 	"net/http"
 
+	"github.com/go-chi/chi/middleware"
 	"github.com/go-chi/chi/v5"
 )
 
@@ -12,7 +13,9 @@ type Application struct {
 
 // mount
 func (app *Application) mount() http.Handler {
-	return chi.NewRouter()
+	r := chi.NewRouter()
+	r.Use(middleware.Logger)
+	return r
 
 }
 
